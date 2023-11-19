@@ -9,6 +9,3 @@
   - Searching
   - Penghitungan total murid dan guru yang terdafar
   - Print dokumen
-
-## Diagram
-![Diagram ER](/Resource/erd.png)
