@@ -1,16 +1,14 @@
-﻿using Guna.UI2.WinForms.Suite;
-using MySqlConnector;
+﻿using MySqlConnector;
 using StudentManagementSystem.Model;
 using System.Data;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace StudentManagementSystem
 {
-    internal class StudentClass :Model.Connection
+    internal class StudentClass : Model.Connection
     {
         Connection koneksi = new Connection();
 
-        public void insertStudent(string nis,string KodeComp, string firstname, string lastname, DateTime bisthdate, string gender, string phone, string address, byte[] img)
+        public void insertStudent(string nis, string KodeComp, string firstname, string lastname, DateTime bisthdate, string gender, string phone, string address, byte[] img)
         {
             string add = "INSERT INTO student VALUES (" + "@NIS,@CodCompt,@FirstName,@LastName,@Birthdate,@Gender,@Phone,@Address,@Photo)";
             try
@@ -36,10 +34,10 @@ namespace StudentManagementSystem
         {
             DataTable date = new DataTable();
             try
-            {               
+            {
                 string show = "SELECT * FROM student";
                 da = new MySqlConnector.MySqlDataAdapter(show, GetConn());
-                da.Fill(date);              
+                da.Fill(date);
             }
             catch (Exception ex)
             {
@@ -52,7 +50,7 @@ namespace StudentManagementSystem
             MySqlCommand command = new MySqlCommand(query, koneksi.GetConn());
             koneksi.openConnect();
             string count = command.ExecuteScalar().ToString();
-            koneksi.closeConnect();            
+            koneksi.closeConnect();
             return count;
         }
         public string totalStudent()
@@ -67,6 +65,8 @@ namespace StudentManagementSystem
         {
             return exeCount("SELECT COUNT(*) FROM student WHERE Gender='Female'");
         }
+
+        // Untuk mencari data di murid
         public DataTable searchStudent(string search)
         {
             DataTable table = new DataTable();
@@ -97,8 +97,8 @@ namespace StudentManagementSystem
                 MessageBox.Show("Delete failed!!" + ex.Message);
             }
         }
-        public void updateStudent(string nis,string codeCompt,string firstname, string lastname, DateTime bisthdate, string gender, string phone, string address, byte[] img)
-        {            
+        public void updateStudent(string nis, string codeCompt, string firstname, string lastname, DateTime bisthdate, string gender, string phone, string address, byte[] img)
+        {
             string update = "UPDATE student SET " + "NIS=@NIS,CodCompt=@CodCompt,FirstName=@FirstName,LastName=@LastName,Birthdate=@Birthdate,Gender=@Gender,Phone=@Phone,Address=@Address,Photo=@Photo " +
                 "WHERE NIS= " + nis;
             try
@@ -126,7 +126,7 @@ namespace StudentManagementSystem
             DataTable table = new DataTable();
             try
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);              
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 adapter.Fill(table);
 
             }
